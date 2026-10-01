@@ -18,7 +18,7 @@ class Grid:
 
     def add_cell(self, x : int, y : int) -> None:
         """
-        Function to add a living cell to the grid
+        Method to add a living cell to the grid
         :param x: x coord of cell
         :param y: y coord of cell
         :return: None
@@ -28,10 +28,10 @@ class Grid:
 
     def get_neighbour_coords(self, x : int, y : int) -> list:
         """
-
-        :param x:
-        :param y:
-        :return:
+        Method that gets the co-ordinates of each neighbouring cell in the grid
+        :param x: X co-ordinate of the target cell
+        :param y: Y co-ordinate of the target cekk
+        :return: A list of co-ordinates in the form [x, y]
         """
         neighbours_coords = []
         for row in range(-1,2):
