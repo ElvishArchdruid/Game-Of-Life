@@ -104,7 +104,7 @@ class Grid:
             print("= = = " * self.size)
             self.display()
             time.sleep(1)
-            self.grid_array = self.rules()
+            self.update()
 
     def rules(self) -> list:
         """
@@ -130,3 +130,6 @@ class Grid:
                         new_grid_array[y][x] = "#"
 
         return new_grid_array
+
+    def update(self) -> None:
+        self.grid_array = self.rules()

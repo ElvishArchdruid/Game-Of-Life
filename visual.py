@@ -38,6 +38,7 @@ class Game:
         Method to draw the grid to the screen
         :return: None
         """
-        for x in range(0, self.grid_size, self.block_size):
-            for y in range(0, self.grid_size, self.block_size):
-                rect = pygame.Rect(x, y, self.block_size, self.block_size)
+        for y in range(self.grid_size):
+            for x in range(self.grid_size):
+                rect = pygame.Rect(x * self.block_size, y * self.block_size, self.block_size, self.block_size)
+                pygame.draw.rect(self.SCREEN, BLACK, rect)
