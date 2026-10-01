@@ -81,3 +81,12 @@ class Grid:
         :return: None
         """
         self.grid_array[y][x] = "-"
+
+    def birth(self, x : int, y : int) -> None:
+        """
+        Method to turn dead cells into live cells
+        :param x: X co-ordinate of the target cell
+        :param y: Y co-ordinate of the target cell
+        :return: None
+        """
+        self.grid_array[y][x] = "#"
