@@ -72,3 +72,12 @@ class Grid:
                 count += 1
 
         return count
+
+    def kill(self, x : int, y : int) -> None:
+        """
+        Method to turn live cells into dead cells
+        :param x: X co-ordinate of the target cell
+        :param y: Y co-ordinate of the target cell
+        :return: None
+        """
+        self.grid_array[y][x] = "-"
