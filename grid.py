@@ -41,9 +41,9 @@ class Grid:
             for col in range(-1,2):
                 if row == col == 0:
                     pass
-                elif x + row < 0 or x + row > self.size:
+                elif x + row < 0 or x + row > self.size-1:
                     pass
-                elif y + col < 0 or y + col > self.size:
+                elif y + col < 0 or y + col > self.size-1:
                     pass
                 else:
                     neighbours_coords.append([x+row, y+col])
@@ -67,11 +67,11 @@ class Grid:
         Method that returns the number of living neighbours a cell has
         :param x: X co-ordinate of the target cell
         :param y: Y co-ordinate of the target cell
-        :return: Number of neighbours
+        :return: Number of living neighbours
         """
         count = 0
         for cell in self.get_neighbour_coords(x, y):
-            if self.get_state(cell[1], cell[0]):
+            if self.get_state(cell[0], cell[1]):
                 count += 1
 
         return count
@@ -104,18 +104,29 @@ class Grid:
             print("= = = " * self.size)
             self.display()
             time.sleep(1)
-            self.rules()
+            self.grid_array = self.rules()
 
-    def rules(self) -> None:
+    def rules(self) -> list:
         """
         Simulates the various rules of the game
-        :return: None
+        :return: New grid after rules are applied
         """
-        new_grid_array = self.grid_array
+        new_grid_array = [x[:] for x in self.grid_array]
 
-        for x in range(self.size-1):
-            for y in range(self.size-1):
+        for x in range(self.size):
+            for y in range(self.size):
                 # Rule 1:
-                # A cell with fewer than 2 live neighbours dies
-                if self.get_live_neighbours(x, y) < 2:
-                    new_grid_array[y][x] = "-"
+                # A living cell with fewer than 2 live neighbours dies
+                # Rule 2:
+                # A living cell with more than 3 live neighbours dies
+                # Rule 3:
+                # A dead cell with exactly 3 living neighbours becomes alive
+                if self.get_state(x, y): # Alive
+                    if self.get_live_neighbours(x, y) < 2 or self.get_live_neighbours(x, y) > 3:
+                        new_grid_array[y][x] = "-"
+
+                else:
+                    if self.get_live_neighbours(x, y) == 3:
+                        new_grid_array[y][x] = "#"
+
+        return new_grid_array
