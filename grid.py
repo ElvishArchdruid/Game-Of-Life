@@ -104,3 +104,18 @@ class Grid:
             print("= = = " * self.size)
             self.display()
             time.sleep(1)
+            self.rules()
+
+    def rules(self) -> None:
+        """
+        Simulates the various rules of the game
+        :return: None
+        """
+        new_grid_array = self.grid_array
+
+        for x in range(self.size-1):
+            for y in range(self.size-1):
+                # Rule 1:
+                # A cell with fewer than 2 live neighbours dies
+                if self.get_live_neighbours(x, y) < 2:
+                    new_grid_array[y][x] = "-"
