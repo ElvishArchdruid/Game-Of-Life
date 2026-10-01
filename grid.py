@@ -30,7 +30,7 @@ class Grid:
         """
         Method that gets the co-ordinates of each neighbouring cell in the grid
         :param x: X co-ordinate of the target cell
-        :param y: Y co-ordinate of the target cekk
+        :param y: Y co-ordinate of the target cell
         :return: A list of co-ordinates in the form [x, y]
         """
         neighbours_coords = []
@@ -46,3 +46,24 @@ class Grid:
                     neighbours_coords.append([x+row, y+col])
 
         return neighbours_coords
+
+    def get_state(self, x : int, y: int) -> bool:
+        """
+        Method that returns the state of a target cell
+        :param x: X co-ordinate of the target cell
+        :param y: Y co-ordinate of the target cell
+        :return: True if alive, False if dead
+        """
+        if (self.grid_array[y][x] == "#"):
+            return True
+        else:
+            return False
+
+    def get_live_neighbours(self, x : int, y : int) -> int:
+        """
+        Method that returns the number of living neighbours a cell has
+        :param x: X co-ordinate of the target cell
+        :param y: Y co-ordinate of the target cell
+        :return: Number of neighbours
+        """
+        pass
