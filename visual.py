@@ -41,7 +41,10 @@ class Game:
 
 
     def set_grid(self):
-        self.grid.add_cell(10, 4)
+        self.grid.add_cell(7, 7)
+        self.grid.add_cell(7, 8)
+        self.grid.add_cell(6, 8)
+        self.grid.add_cell(8, 8)
 
 
     def draw_grid(self) -> None:
