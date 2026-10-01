@@ -1,5 +1,8 @@
 import sys
 import pygame
+import time
+
+import grid
 from grid import Grid
 
 
@@ -24,6 +27,7 @@ class Game:
         """
 
         while True:
+            self.SCREEN.fill(WHITE)
             self.draw_grid()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -31,6 +35,13 @@ class Game:
                     sys.exit()
 
             pygame.display.update()
+
+            time.sleep(1)
+            self.grid.update()
+
+
+    def set_grid(self):
+        self.grid.add_cell(10, 4)
 
 
     def draw_grid(self) -> None:
@@ -40,5 +51,6 @@ class Game:
         """
         for y in range(self.grid_size):
             for x in range(self.grid_size):
-                rect = pygame.Rect(x * self.block_size, y * self.block_size, self.block_size, self.block_size)
-                pygame.draw.rect(self.SCREEN, BLACK, rect)
+                if self.grid.get_array()[y][x] == "#":
+                    rect = pygame.Rect(x * self.block_size, y * self.block_size, self.block_size, self.block_size)
+                    pygame.draw.rect(self.SCREEN, BLACK, rect)

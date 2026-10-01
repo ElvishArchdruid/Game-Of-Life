@@ -132,4 +132,11 @@ class Grid:
         return new_grid_array
 
     def update(self) -> None:
+        """
+        Updates the game according to the rules
+        :return: None
+        """
         self.grid_array = self.rules()
+
+    def get_array(self) -> list:
+        return self.grid_array
