@@ -66,4 +66,9 @@ class Grid:
         :param y: Y co-ordinate of the target cell
         :return: Number of neighbours
         """
-        pass
+        count = 0
+        for cell in self.get_neighbour_coords(x, y):
+            if self.get_state(cell[1], cell[0]):
+                count += 1
+
+        return count
