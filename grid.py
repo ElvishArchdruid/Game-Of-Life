@@ -1,3 +1,6 @@
+import time
+
+
 class Grid:
     def __init__(self, size : int):
         """
@@ -54,7 +57,7 @@ class Grid:
         :param y: Y co-ordinate of the target cell
         :return: True if alive, False if dead
         """
-        if (self.grid_array[y][x] == "#"):
+        if self.grid_array[y][x] == "#":
             return True
         else:
             return False
@@ -90,3 +93,14 @@ class Grid:
         :return: None
         """
         self.grid_array[y][x] = "#"
+
+    def sim(self, gens : int) -> None:
+        """
+        Method to run the simulation for a number of generations
+        :param gens: Number of generations to run the simulation for
+        :return: None
+        """
+        for i in range(gens):
+            print("= = = " * self.size)
+            self.display()
+            time.sleep(1)
