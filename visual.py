@@ -30,6 +30,8 @@ class Game:
         self.squares = []
         self.init_grid()
 
+        self.setup = True
+
     def main(self) -> None:
         """
         Main game loop
@@ -38,16 +40,29 @@ class Game:
 
         while True:
             self.SCREEN.fill(WHITE)
-            self.draw()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                if event.type == pygame.MOUSEBUTTONUP and self.setup:
+                    pos = pygame.mouse.get_pos()
 
+                    for s in self.squares:
+                        if s.get_rect().collidepoint(pos):
+                            s.live()
+                            self.grid.add_cell(s.get_x(), s.get_y())
+
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        self.setup = False
+
+
+            if not self.setup:
+                self.update()
+                time.sleep(1)
+
+            self.draw()
             pygame.display.update()
-
-            time.sleep(1)
-            self.grid.update()
 
     def init_grid(self) -> None:
         """
@@ -60,7 +75,13 @@ class Game:
 
     def draw(self) -> None:
         for s in self.squares:
+            s.draw(self.SCREEN)
+
+    def update(self):
+        self.grid.update()
+
+        for s in self.squares:
             if self.grid.get_state(s.get_x(), s.get_y()):
-                s.draw_live(self.SCREEN)
+                s.live()
             else:
-                s.draw_dead(self.SCREEN)
+                s.die()
