@@ -43,5 +43,8 @@ class Square:
     def live(self) -> None:
         self.state = True
 
-    def die(self) -> None:
+    def kill(self) -> None:
         self.state = False
+
+    def get_state(self) -> bool:
+        return self.state

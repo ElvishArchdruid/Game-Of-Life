@@ -49,12 +49,17 @@ class Game:
 
                     for s in self.squares:
                         if s.get_rect().collidepoint(pos):
-                            s.live()
-                            self.grid.add_cell(s.get_x(), s.get_y())
+                            if s.get_state():
+                                s.kill()
+                                self.grid.kill(s.get_x(), s.get_y())
+                            else:
+                                s.live()
+                                self.grid.add_cell(s.get_x(), s.get_y())
 
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
                         self.setup = False
+                        print("START")
 
 
             if not self.setup:
@@ -84,4 +89,4 @@ class Game:
             if self.grid.get_state(s.get_x(), s.get_y()):
                 s.live()
             else:
-                s.die()
+                s.kill()
